@@ -1,0 +1,7 @@
+E:\ElevenFiftyProjects\CSharpFundamentals\Hangman\Hangman.UI\bin\Debug\Hangman.UI.exe.config
+E:\ElevenFiftyProjects\CSharpFundamentals\Hangman\Hangman.UI\bin\Debug\Hangman.UI.exe
+E:\ElevenFiftyProjects\CSharpFundamentals\Hangman\Hangman.UI\bin\Debug\Hangman.UI.pdb
+E:\ElevenFiftyProjects\CSharpFundamentals\Hangman\Hangman.UI\obj\Debug\Hangman.UI.csprojAssemblyReference.cache
+E:\ElevenFiftyProjects\CSharpFundamentals\Hangman\Hangman.UI\obj\Debug\Hangman.UI.csproj.CoreCompileInputs.cache
+E:\ElevenFiftyProjects\CSharpFundamentals\Hangman\Hangman.UI\obj\Debug\Hangman.UI.exe
+E:\ElevenFiftyProjects\CSharpFundamentals\Hangman\Hangman.UI\obj\Debug\Hangman.UI.pdb
