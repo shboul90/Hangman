@@ -11,18 +11,13 @@ namespace Hangman.UI
     //Display dashes, Number of lives
     //Incorrect Display Hang Man
     // 
-
     class ProgramUI
     {
         private readonly List<string> _wordBank = new List<string>();
-
         internal void Run()
         {
-            
-
             while (this.RunMenu()) ;
         }
-
 
         private bool RunMenu()
         {
@@ -47,24 +42,66 @@ namespace Hangman.UI
                     return true;
             }
         }
-
         private void WordBank(string userinput)
         {
             if (userinput=="1")
             {
+                string selection = "Movie";
                 string wordToGuessUppercase = PullFromMovies();
                 Console.Clear();
-                Console.WriteLine("Here is the Movie you need to guess:\n");
+                Console.WriteLine($"Here is the {selection} you need to guess:\n");
                 StringBuilder displayToPlayer = DisplayWordLength(wordToGuessUppercase);
                 Console.WriteLine("You have six (6) guesses to make, choose wisely");
-                StartGame(wordToGuessUppercase, displayToPlayer);
+                StartGame(wordToGuessUppercase, displayToPlayer, selection);
+
+                Console.ReadKey();
+            }
+            else if (userinput == "2")
+            {
+                string selection = "Sports Team";
+                string wordToGuessUppercase = PullFromSportsTeams();
+                Console.Clear();
+                Console.WriteLine($"Here is the {selection} you need to guess:\n");
+                StringBuilder displayToPlayer = DisplayWordLength(wordToGuessUppercase);
+                Console.WriteLine("You have six (6) guesses to make, choose wisely");
+                StartGame(wordToGuessUppercase, displayToPlayer, selection);
+
+                Console.ReadKey();
+            }
+            else if (userinput == "3")
+            {
+                string selection = "Food";
+                string wordToGuessUppercase = PullFromFoods();
+                Console.Clear();
+                Console.WriteLine($"Here is the {selection} you need to guess:\n");
+                StringBuilder displayToPlayer = DisplayWordLength(wordToGuessUppercase);
+                Console.WriteLine("You have six (6) guesses to make, choose wisely");
+                StartGame(wordToGuessUppercase, displayToPlayer, selection);
 
                 Console.ReadKey();
             }
         }
-
-        private void StartGame(string wordToGuess, StringBuilder displayToPlayer)
+        private string PullFromFoods()
         {
+            Random random = new Random((int)DateTime.Now.Ticks);
+            string[] arrayMovies = System.IO.File.ReadAllLines(@"Foods.txt");
+            string wordToGuess = arrayMovies[random.Next(0, arrayMovies.Length)];
+            string wordToGuessUppercase = wordToGuess.ToUpper();
+
+            return wordToGuessUppercase;
+        }
+        private string PullFromSportsTeams()
+        {
+            Random random = new Random((int)DateTime.Now.Ticks);
+            string[] arrayMovies = System.IO.File.ReadAllLines(@"Sports.txt");
+            string wordToGuess = arrayMovies[random.Next(0, arrayMovies.Length)];
+            string wordToGuessUppercase = wordToGuess.ToUpper();
+
+            return wordToGuessUppercase;
+        }
+        private void StartGame(string wordToGuess, StringBuilder displayToPlayer, string category)
+        {
+            
             List<char> correctGuesses = new List<char>();
             List<char> incorrectGuesses = new List<char>();
 
@@ -92,11 +129,9 @@ namespace Hangman.UI
             {
                 HangManModel(lives);
                 PrintInColor($"You have {lives} lives remaining!", ConsoleColor.DarkYellow);
-                PrintInColor("Guess a Letter: ", ConsoleColor.Blue);
-                
+                PrintInColor($"Guess a Letter or Number for the {category}: ", ConsoleColor.Blue);
                 input = Console.ReadLine().ToUpper();
                 guess = input[0];
-
 
                 if (correctGuesses.Contains(guess))
                 {
@@ -136,7 +171,6 @@ namespace Hangman.UI
                 
             }
 
-
             HangManModel(lives);
             if (won)
                 PrintInColor($"You won! Good job on guess {wordToGuess}", ConsoleColor.Green );
@@ -147,7 +181,6 @@ namespace Hangman.UI
             Console.ReadLine();
 
         }
-
         private void HangManModel(int livesLeft)
         {
             switch (livesLeft)
@@ -324,8 +357,6 @@ namespace Hangman.UI
             }
 
         }
-
-
         private string PullFromMovies()
         {
             Random random = new Random((int)DateTime.Now.Ticks);
@@ -335,12 +366,10 @@ namespace Hangman.UI
 
             return wordToGuessUppercase;
         }
-
         private StringBuilder DisplayWordLength(string wordToGuess)
         {
-            
-
             StringBuilder displayToPlayer = new StringBuilder(wordToGuess.Length);
+
             foreach(char a in wordToGuess)
             {
                 if(a == ' ')
@@ -355,15 +384,11 @@ namespace Hangman.UI
                 {
                     displayToPlayer.Append('-');
                 }
-                
             }
             
             PrintInColorBuilder(displayToPlayer, ConsoleColor.Green, ConsoleColor.Black);
             return displayToPlayer;
         }
-
-
-
         private void DisplayMenu()
         {
             Console.Clear();
@@ -375,14 +400,12 @@ namespace Hangman.UI
                 $"3. Food\n" +
                 $"4. Exit");
         }
-
         private void PrintError(string message)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(message);
             Console.ResetColor();
         }
-
         private void PrintInColor(string obj, ConsoleColor color)
         {
             Console.ForegroundColor = color;
@@ -396,7 +419,5 @@ namespace Hangman.UI
             Console.WriteLine(obj);
             Console.ResetColor();
         }
-
-
     }
 }
