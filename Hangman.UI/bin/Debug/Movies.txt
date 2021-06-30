@@ -3,3 +3,33 @@ The Shawshank Redemption
 Schindler's List
 Raging Bull
 Casablanca
+Citizen Kane
+Gone with the Wind
+The Wizard of Oz
+Lawrence of Arabia
+Forrest Gump
+The Silence of the Lambs
+The Lord of the Rings
+The Pianist
+Gladiator
+The Green Mile
+Saving Private Ryan
+Titanic
+Braveheart
+Pulp Fiction
+Jurassic Park
+Rain Man
+The Banker
+Bad Boys
+The Dark Knight
+Slumdog Millionaire
+The Departed
+Blood Diamond
+Finding Nemo
+No Country for Old Men
+V for Vendetta
+Three Hundred
+A Beautiful Mind
+Inglourious Basterds
+Black Hawk Down
+American Gangster
