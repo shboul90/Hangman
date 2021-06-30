@@ -186,7 +186,7 @@ namespace Hangman.UI
             switch (livesLeft)
             {
                 case 6:
-                    Console.WriteLine(" ___________.._______\n" +
+                    PrintInColor(" ___________.._______\n" +
                         "| .__________))______|\n" +
                         "| | / /      ||\n" +
                         "| |/ /       ||\n" +
@@ -207,10 +207,10 @@ namespace Hangman.UI
                         "----------|_        \n" +
                         "|-|-------| |       \n" +
                         "| |        | |        \n" +
-                        ": :         | |       \n");
+                        ": :         | |       \n",ConsoleColor.Green);
                     break;
                 case 5:
-                    Console.WriteLine(" ___________.._______\n" +
+                    PrintInColor(" ___________.._______\n" +
                         "| .__________))______|\n" +
                         "| | / /      ||\n" +
                         "| |/ /       ||\n" +
@@ -231,10 +231,10 @@ namespace Hangman.UI
                         "----------|_        \n" +
                         "|-|-------| |       \n" +
                         "| |        | |        \n" +
-                        ": :         | |       \n");
+                        ": :         | |       \n", ConsoleColor.DarkGreen);
                     break;
                 case 4:
-                    Console.WriteLine(" ___________.._______\n" +
+                    PrintInColor(" ___________.._______\n" +
                         "| .__________))______|\n" +
                         "| | / /      ||\n" +
                         "| |/ /       ||\n" +
@@ -255,10 +255,10 @@ namespace Hangman.UI
                         "----------|_\n" +
                         "|-|-------| |\n" +
                         "| |        | |\n" +
-                        ": :         | |\n");
+                        ": :         | |\n", ConsoleColor.Gray);
                     break;
                 case 3:
-                    Console.WriteLine(" ___________.._______\n" +
+                    PrintInColor(" ___________.._______\n" +
                         "| .__________))______|\n" +
                         "| | / /      ||\n" +
                         "| |/ /       ||\n" +
@@ -279,10 +279,10 @@ namespace Hangman.UI
                         "----------|_\n" +
                         "|-|-------| |\n" +
                         "| |        | |\n" +
-                        ": :         | |\n");
+                        ": :         | |\n", ConsoleColor.DarkGray);
                     break;
                 case 2:
-                    Console.WriteLine(" ___________.._______\n" +
+                    PrintInColor(" ___________.._______\n" +
                         "| .__________))______|\n" +
                         "| | / /      ||\n" +
                         "| |/ /       ||\n" +
@@ -303,10 +303,10 @@ namespace Hangman.UI
                         "----------|_\n" +
                         "|-|-------| |\n" +
                         "| |        | |\n" +
-                        ": :         | |\n");
+                        ": :         | |\n", ConsoleColor.Magenta);
                     break;
                 case 1:
-                    Console.WriteLine(" ___________.._______\n" +
+                    PrintInColor(" ___________.._______\n" +
                         "| .__________))______|\n" +
                         "| | / /      ||\n" +
                         "| |/ /       ||\n" +
@@ -327,10 +327,10 @@ namespace Hangman.UI
                         "----------|_`-'\n" +
                         "|-|-------| |\n" +
                         "| |        | |\n" +
-                        ": :         | |\n");
+                        ": :         | |\n", ConsoleColor.DarkMagenta);
                     break;
                 default:
-                    Console.WriteLine(" ___________.._______\n" +
+                    PrintInColor(" ___________.._______\n" +
                         "| .__________))______|\n" +
                         "| | / /      ||\n" +
                         "| |/ /       ||\n" +
@@ -351,7 +351,7 @@ namespace Hangman.UI
                         "----------|_`-' `-'\n" +
                         "|-|-------| |\n" +
                         "| |        | |\n" +
-                        ": :         | |\n");
+                        ": :         | |\n",ConsoleColor.DarkRed);
                     break;
                     
             }
@@ -392,13 +392,27 @@ namespace Hangman.UI
         private void DisplayMenu()
         {
             Console.Clear();
-            Console.WriteLine($"-----------HangMan----------\n\n" +
-                $"----------Main Menu---------\n" +
-                $"**Choose A Category or Exit**\n" +
-                $"1. Movies\n" +
-                $"2. Sports\n" +
-                $"3. Food\n" +
-                $"4. Exit");
+            PrintInColor(
+                $"----------------------------------------------------------------------\n" +
+                $"888  888\n" +
+                $"888  888\n" +
+                $"888  888\n" +
+                $"88888888  8888b.  88888b.   .d88b.  88888b.d88b.   8888b.  88888b.\n" +
+                $"888 *88b    *88b 888 *88bd 88P*88b 888 *888 *88b     *88b8 88 *88b\n" +
+                $"888  888 .d88888 8888  888 888  88 8888  888  888 .d888888 888  888\n" +
+                $"888  888 888  88 8888  888 Y88b 88 8888  888  888 888  888 888  888\n" +
+                $"888  888 *Y88888 8888  888  *Y8888 8888  888  888 *Y888888 888  888\n" +
+                $"                               888\n" +
+                $"                          Y8b d88P\n" +
+                $"                           *Y88P*\n" +
+                $"----------------------------------------------------------------------\n\n", ConsoleColor.DarkYellow);
+            PrintInColor(
+                $"                  ----------Main Menu---------\n" +
+                $"                  **Choose A Category or Exit**\n" +
+                $"                           1. Movies\n" +
+                $"                           2. Sports\n" +
+                $"                           3. Food\n" +
+                $"                           4. Exit", ConsoleColor.Blue);
         }
         private void PrintError(string message)
         {
