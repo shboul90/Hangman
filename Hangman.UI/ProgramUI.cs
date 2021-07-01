@@ -16,13 +16,20 @@ namespace Hangman.UI
         private readonly List<string> _wordBank = new List<string>();
         internal void Run()
         {
+            
             while (this.RunMenu()) ;
         }
 
         private bool RunMenu()
         {
-            this.DisplayMenu();
+            var task = CycleImagesEveryTen();
 
+            task.Wait();
+
+            Console.Clear();
+
+            this.DisplayMenu();
+            
             switch (Console.ReadLine())
             {
                 case "1":
@@ -41,6 +48,8 @@ namespace Hangman.UI
                     Console.ReadLine();
                     return true;
             }
+
+            
         }
         private void WordBank(string userinput)
         {
@@ -131,6 +140,11 @@ namespace Hangman.UI
                 PrintInColor($"You have {lives} lives remaining!", ConsoleColor.DarkYellow);
                 PrintInColor($"Guess a Letter or Number for the {category}: ", ConsoleColor.Blue);
                 input = Console.ReadLine().ToUpper();
+                while (input == "")
+                {
+                    PrintError("Please enter a valid value");
+                    input = Console.ReadLine().ToUpper();
+                }
                 guess = input[0];
 
                 if (correctGuesses.Contains(guess))
@@ -354,6 +368,204 @@ namespace Hangman.UI
                         ": :         | |\n",ConsoleColor.DarkRed);
                     break;
                     
+            }
+
+        }
+
+        public async Task CycleImagesEveryTen()
+        {
+            int t = 7;
+            int e = 6;
+            while (t>0)
+            {
+                Console.Clear();
+                var delayTask = Task.Delay(1000);
+                if (e<0)
+                {
+                    e = 6;
+                }
+                
+                CycleImages(e);
+                await delayTask; // wait until at least 10s elapsed since delayTask created
+                e--;
+                t--;
+            }
+            
+        }
+
+        private void CycleImages(int livesLeft)
+        {
+            switch (livesLeft)
+            {
+                case 6:
+                    PrintInColor(" ___________.._______\n" +
+                        "| .__________))______|\n" +
+                        "| | / /      ||\n" +
+                        "| |/ /       ||\n" +
+                        "| | /        ||\n" +
+                        "| |/         ||\n" +
+                        "| |          ||\n" +
+                        "| |          (\\\n" +
+                        "| |         \n" +
+                        "| |        \n" +
+                        "| |          \n" +
+                        "| |          \n" +
+                        "| |             \n" +
+                        "| |          \n" +
+                        "| |          \n" +
+                        "| |          \n" +
+                        "| |          \n" +
+                        "| |         \n" +
+                        "----------|_        \n" +
+                        "|-|-------| |       \n" +
+                        "| |        | |        \n" +
+                        ": :         | |       \n", ConsoleColor.Green);
+                    break;
+                case 5:
+                    PrintInColor(" ___________.._______\n" +
+                        "| .__________))______|\n" +
+                        "| | / /      ||\n" +
+                        "| |/ /       ||\n" +
+                        "| | /        ||.-''.\n" +
+                        "| |/         |/  _  \\\n" +
+                        "| |          ||  `/,|\n" +
+                        "| |          (\\\\`_.'\n" +
+                        "| |         \n" +
+                        "| |        \n" +
+                        "| |          \n" +
+                        "| |          \n" +
+                        "| |             \n" +
+                        "| |          \n" +
+                        "| |          \n" +
+                        "| |          \n" +
+                        "| |          \n" +
+                        "| |         \n" +
+                        "----------|_        \n" +
+                        "|-|-------| |       \n" +
+                        "| |        | |        \n" +
+                        ": :         | |       \n", ConsoleColor.DarkGreen);
+                    break;
+                case 4:
+                    PrintInColor(" ___________.._______\n" +
+                        "| .__________))______|\n" +
+                        "| | / /      ||\n" +
+                        "| |/ /       ||\n" +
+                        "| | /        ||.-''.\n" +
+                        "| |/         |/  _  \\\n" +
+                        "| |          ||  `/,|\n" +
+                        "| |          (\\\\`_.'\n" +
+                        "| |         .-`--'.\n" +
+                        "| |         Y . . Y\n" +
+                        "| |          |   | \n" +
+                        "| |          | . |  \n" +
+                        "| |          |   |   \n" +
+                        "| |           --- \n" +
+                        "| |          \n" +
+                        "| |          \n" +
+                        "| |          \n" +
+                        "| |         \n" +
+                        "----------|_\n" +
+                        "|-|-------| |\n" +
+                        "| |        | |\n" +
+                        ": :         | |\n", ConsoleColor.Gray);
+                    break;
+                case 3:
+                    PrintInColor(" ___________.._______\n" +
+                        "| .__________))______|\n" +
+                        "| | / /      ||\n" +
+                        "| |/ /       ||\n" +
+                        "| | /        ||.-''.\n" +
+                        "| |/         |/  _  \\\n" +
+                        "| |          ||  `/,|\n" +
+                        "| |          (\\\\`_.'\n" +
+                        "| |         .-`--'.\n" +
+                        "| |        /Y . . Y\n" +
+                        "| |       // |   | \n" +
+                        "| |      //  | . |  \n" +
+                        "| |     (')  |   |   \n" +
+                        "| |           --- \n" +
+                        "| |          \n" +
+                        "| |          \n" +
+                        "| |          \n" +
+                        "| |         \n" +
+                        "----------|_\n" +
+                        "|-|-------| |\n" +
+                        "| |        | |\n" +
+                        ": :         | |\n", ConsoleColor.DarkGray);
+                    break;
+                case 2:
+                    PrintInColor(" ___________.._______\n" +
+                        "| .__________))______|\n" +
+                        "| | / /      ||\n" +
+                        "| |/ /       ||\n" +
+                        "| | /        ||.-''.\n" +
+                        "| |/         |/  _  \\\n" +
+                        "| |          ||  `/,|\n" +
+                        "| |          (\\\\`_.'\n" +
+                        "| |         .-`--'.\n" +
+                        "| |        /Y . . Y\\\n" +
+                        "| |       // |   | \\\\\n" +
+                        "| |      //  | . |  \\\\\n" +
+                        "| |     (')  |   |   (`)\n" +
+                        "| |           --- \n" +
+                        "| |          \n" +
+                        "| |          \n" +
+                        "| |          \n" +
+                        "| |         \n" +
+                        "----------|_\n" +
+                        "|-|-------| |\n" +
+                        "| |        | |\n" +
+                        ": :         | |\n", ConsoleColor.Magenta);
+                    break;
+                case 1:
+                    PrintInColor(" ___________.._______\n" +
+                        "| .__________))______|\n" +
+                        "| | / /      ||\n" +
+                        "| |/ /       ||\n" +
+                        "| | /        ||.-''.\n" +
+                        "| |/         |/  _  \\\n" +
+                        "| |          ||  `/,|\n" +
+                        "| |          (\\\\`_.'\n" +
+                        "| |         .-`--'.\n" +
+                        "| |        /Y . . Y\\\n" +
+                        "| |       // |   | \\\\\n" +
+                        "| |      //  | . |  \\\\\n" +
+                        "| |     (')  |   |   (`)\n" +
+                        "| |          |--- \n" +
+                        "| |          ||\n" +
+                        "| |          ||\n" +
+                        "| |          ||\n" +
+                        "| |         / |\n" +
+                        "----------|_`-'\n" +
+                        "|-|-------| |\n" +
+                        "| |        | |\n" +
+                        ": :         | |\n", ConsoleColor.DarkMagenta);
+                    break;
+                case 0:
+                    PrintInColor(" ___________.._______\n" +
+                        "| .__________))______|\n" +
+                        "| | / /      ||\n" +
+                        "| |/ /       ||\n" +
+                        "| | /        ||.-''.\n" +
+                        "| |/         |/  _  \\\n" +
+                        "| |          ||  `/,|\n" +
+                        "| |          (\\\\`_.'\n" +
+                        "| |         .-`--'.\n" +
+                        "| |        /Y . . Y\\\n" +
+                        "| |       // |   | \\\\\n" +
+                        "| |      //  | . |  \\\\\n" +
+                        "| |     (')  |   |   (`)\n" +
+                        "| |          |---|\n" +
+                        "| |          || ||\n" +
+                        "| |          || ||\n" +
+                        "| |          || ||\n" +
+                        "| |         / | | \\\n" +
+                        "----------|_`-' `-'\n" +
+                        "|-|-------| |\n" +
+                        "| |        | |\n" +
+                        ": :         | |\n", ConsoleColor.DarkRed);
+                    break;
+
             }
 
         }
