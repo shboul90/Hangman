@@ -58,9 +58,7 @@ namespace Hangman.UI
                 string selection = "Movie";
                 string wordToGuessUppercase = PullFromMovies();
                 Console.Clear();
-                Console.WriteLine($"Here is the {selection} you need to guess:\n");
                 StringBuilder displayToPlayer = DisplayWordLength(wordToGuessUppercase);
-                Console.WriteLine("You have six (6) guesses to make, choose wisely");
                 StartGame(wordToGuessUppercase, displayToPlayer, selection);
 
                 Console.ReadKey();
@@ -70,9 +68,7 @@ namespace Hangman.UI
                 string selection = "Sports Team";
                 string wordToGuessUppercase = PullFromSportsTeams();
                 Console.Clear();
-                Console.WriteLine($"Here is the {selection} you need to guess:\n");
                 StringBuilder displayToPlayer = DisplayWordLength(wordToGuessUppercase);
-                Console.WriteLine("You have six (6) guesses to make, choose wisely");
                 StartGame(wordToGuessUppercase, displayToPlayer, selection);
 
                 Console.ReadKey();
@@ -82,9 +78,7 @@ namespace Hangman.UI
                 string selection = "Food";
                 string wordToGuessUppercase = PullFromFoods();
                 Console.Clear();
-                Console.WriteLine($"Here is the {selection} you need to guess:\n");
                 StringBuilder displayToPlayer = DisplayWordLength(wordToGuessUppercase);
-                Console.WriteLine("You have six (6) guesses to make, choose wisely");
                 StartGame(wordToGuessUppercase, displayToPlayer, selection);
 
                 Console.ReadKey();
@@ -137,15 +131,28 @@ namespace Hangman.UI
             while (!won && lives > 0)
             {
                 HangManModel(lives);
-                PrintInColor($"You have {lives} lives remaining!", ConsoleColor.DarkYellow);
+
+                PrintInColor($"This is the word you need to guess (Remember the Category is {category}):", ConsoleColor.Blue);
+                PrintInColor(displayToPlayer.ToString(), ConsoleColor.White);
+
+                PrintInColor($"\nYou have {lives} lives remaining!", ConsoleColor.DarkYellow);
+
+                Console.WriteLine("Here are your incorrect guess:");
+                PrintCharInList(incorrectGuesses, ConsoleColor.Red);
+                
                 PrintInColor($"Guess a Letter or Number for the {category}: ", ConsoleColor.Blue);
+
                 input = Console.ReadLine().ToUpper();
+
                 while (input == "")
                 {
                     PrintError("Please enter a valid value");
                     input = Console.ReadLine().ToUpper();
                 }
+
                 guess = input[0];
+
+                Console.Clear();
 
                 if (correctGuesses.Contains(guess))
                 {
@@ -180,9 +187,6 @@ namespace Hangman.UI
                     Console.WriteLine("Nope, there's no '{0}' in it!", guess);
                     lives--;
                 }
-
-                PrintInColor(displayToPlayer.ToString(), ConsoleColor.Green);
-                
             }
 
             HangManModel(lives);
@@ -193,7 +197,6 @@ namespace Hangman.UI
 
             Console.Write("Press ENTER to exit....");
             Console.ReadLine();
-
         }
         private void HangManModel(int livesLeft)
         {
@@ -379,14 +382,18 @@ namespace Hangman.UI
             while (t>0)
             {
                 Console.Clear();
-                var delayTask = Task.Delay(1000);
+
+                var delayTask = Task.Delay(200);
+
                 if (e<0)
                 {
                     e = 6;
                 }
                 
                 CycleImages(e);
-                await delayTask; // wait until at least 10s elapsed since delayTask created
+
+                await delayTask; 
+
                 e--;
                 t--;
             }
@@ -598,13 +605,12 @@ namespace Hangman.UI
                 }
             }
             
-            PrintInColorBuilder(displayToPlayer, ConsoleColor.Green, ConsoleColor.Black);
             return displayToPlayer;
         }
         private void DisplayMenu()
         {
             Console.Clear();
-            PrintInColor(
+            PrintInColorDelay(
                 $"----------------------------------------------------------------------\n" +
                 $"888  888\n" +
                 $"888  888\n" +
@@ -617,7 +623,7 @@ namespace Hangman.UI
                 $"                               888\n" +
                 $"                          Y8b d88P\n" +
                 $"                           *Y88P*\n" +
-                $"----------------------------------------------------------------------\n\n", ConsoleColor.DarkYellow);
+                $"----------------------------------------------------------------------\n\n", ConsoleColor.DarkYellow, 1);
             PrintInColor(
                 $"                  ----------Main Menu---------\n" +
                 $"                  **Choose A Category or Exit**\n" +
@@ -630,6 +636,27 @@ namespace Hangman.UI
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(message);
+            Console.ResetColor();
+        }
+        private void PrintCharInList(List<char> obj, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            foreach (char c in obj)
+            {
+                Console.Write(c + ", ");
+            }
+            Console.WriteLine();
+            Console.ResetColor();
+        }
+        private void PrintInColorDelay(string obj, ConsoleColor color, int speed)
+        {
+            Console.ForegroundColor = color;
+            foreach (char c in obj)
+            {
+                Console.Write(c);
+                System.Threading.Thread.Sleep(speed);
+            }
+            Console.WriteLine();
             Console.ResetColor();
         }
         private void PrintInColor(string obj, ConsoleColor color)
