@@ -191,9 +191,16 @@ namespace Hangman.UI
 
             HangManModel(lives);
             if (won)
-                PrintInColor($"You won! Good job on guess {wordToGuess}", ConsoleColor.Green );
+            {
+                PrintInColor($"You won! Good job on guess {wordToGuess}", ConsoleColor.Green);
+            }
             else
+            {
+                var task = CycleSwingEveryTen();
+                task.Wait();
                 PrintInColor($"You lost! It was  {wordToGuess}", ConsoleColor.Red);
+            }
+
 
             Console.Write("Press ENTER to exit....");
             Console.ReadLine();
@@ -375,6 +382,111 @@ namespace Hangman.UI
 
         }
 
+        public async Task CycleSwingEveryTen()
+        {
+            int t = 12;
+            int e = 2;
+            while (t > 0)
+            {
+                Console.Clear();
+
+                var delayTask = Task.Delay(200);
+
+                if (e < 0)
+                {
+                    e = 2;
+                }
+
+                CycleSwing(e);
+
+                await delayTask;
+
+                e--;
+                t--;
+            }
+
+        }
+
+        private void CycleSwing(int livesLeft)
+        {
+            switch (livesLeft)
+            {
+                case 0:
+                    PrintInColor(" ___________.._______\n" +
+                        "| .__________))______|\n" +
+                        "| | / /     //\n" +
+                        "| |/ /     //\n" +
+                        "| | /   .-''.\n" +
+                        "| |/   /  _  \\\n" +
+                        "| |    |  `/,|\n" +
+                        "| |   /\\\\`_.'\n" +
+                        "| | .-`--'.\n" +
+                        "| |/Y . . Y\\\n" +
+                        "| // |   | \\\\\n" +
+                        " //  | . |  \\\\\n" +
+                        "(')  |   |  (')  \n" +
+                        "| |  ||'||\n" +
+                        "| |  || ||\n" +
+                        "| |  || ||\n" +
+                        "| |  || ||\n" +
+                        "| | / | | \\\n" +
+                        "****`-' `-'_\n" +
+                        "|-|-------| |\n" +
+                        "| |        | |\n" +
+                        ": :         | |\n", ConsoleColor.DarkRed);
+                    break;
+                case 1:
+                    PrintInColor(" ___________.._______\n" +
+                        "| .__________))______|\n" +
+                        "| | / /      ||\n" +
+                        "| |/ /       ||\n" +
+                        "| | /        ||.-''.\n" +
+                        "| |/         |/  _  \\\n" +
+                        "| |          ||  `/,|\n" +
+                        "| |          (\\\\`_.'\n" +
+                        "| |         .-`--'.\n" +
+                        "| |        /Y . . Y\\\n" +
+                        "| |       // |   | \\\\\n" +
+                        "| |      //  | . |  \\\\\n" +
+                        "| |     (')  |   |   (`)\n" +
+                        "| |          |---|\n" +
+                        "| |          || ||\n" +
+                        "| |          || ||\n" +
+                        "| |          || ||\n" +
+                        "| |         / | | \\\n" +
+                        "----------|_`-' `-'\n" +
+                        "|-|-------| |\n" +
+                        "| |        | |\n" +
+                        ": :         | |\n", ConsoleColor.DarkRed);
+                    break;
+                case 2:
+                    PrintInColor(" ___________.._______\n" +
+                        "| .__________))______|\n" +
+                        "| | / /      \\\\\n" +
+                        "| |/ /        \\\\\n" +
+                        "| | /          \\\\    .-''.\n" +
+                        "| |/            \\\\  /_    \\\n" +
+                        "| |              \\\\( `/,  )\n" +
+                        "| |               \\\\` _. /\n" +
+                        "| |               .-`--'.\n" +
+                        "| |             /Y . . Y\\\\\n" +
+                        "| |            // \\    \\ \\\\\n" +
+                        "| |           //   \\ .  \\ \\\\\n" +
+                        "| |          (')    \\    \\ (`)\n" +
+                        "| |                  -----\n" +
+                        "| |                  \\\\   \\\\\n" +
+                        "| |                   \\\\   \\\\\n" +
+                        "| |                    \\\\   \\\\\n" +
+                        "| |                    / |   \\ \\\n" +
+                        "----------|_           `-'    `-'\n" +
+                        "|-|-------| |\n" +
+                        "| |        | |\n" +
+                        ": :         | |\n", ConsoleColor.DarkRed);
+                    break;
+
+            }
+
+        }
         public async Task CycleImagesEveryTen()
         {
             int t = 7;
